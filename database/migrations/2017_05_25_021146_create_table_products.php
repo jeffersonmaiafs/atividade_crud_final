@@ -16,7 +16,9 @@ class CreateTableProducts extends Migration
             $table->increments('id');
             $table->string('name',80);
             $table->text('description');
-            $table->decimal('prince', 10, 8);
+            $table->decimal('prince', 10,2);
+            $table->boolean('featured');
+            $table->boolean('recommend');
             $table->timestamps();
         });
     }
@@ -31,3 +33,4 @@ class CreateTableProducts extends Migration
         Schema::drop('products');
     }
 }
+
