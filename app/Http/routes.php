@@ -35,47 +35,77 @@
  * 
  *  */
 
-// INICIO
-
-Route::pattern('id', '[0-9]+');
-Route::group(['prefix' =>'admin'], function(){
-    Route::get('categoriagerais/{id?}',['as'=>'categorias', function($id = null) {
-        if ($id) {
-            $category = new \Portfolio\Category();
-            $c = $category->find($id);
-            echo("<br/><br/>");
-            return $c->name;
-        } else {
-            return "<br/>Não possui ID.<br/>";
-        }
-    }]);
-   echo(route('categorias'));
-   echo("<br/><br/>");
-    
-    Route::get('produtosgerais/{id?}',['as'=>'produtos',function($id = null) {
-        if ($id) {
-            $products = new \Portfolio\Products();
-            $p = $products->find($id);
-            echo("<br/><br/>");
-            return $p->name;
-        } else {
-            return "<br/>Não possui ID.<br/>";
-        }
-    }]);
-   echo("<br/><br/>"); 
-   echo(route('produtos'));
-
-  
-});
+//// INICIO
+//
+//Route::pattern('id', '[0-9]+');
+//Route::group(['prefix' =>'admin'], function(){
+//    Route::get('categoriagerais/{id?}',['as'=>'categorias', function($id = null) {
+//        if ($id) {
+//            $category = new \Portfolio\Category();
+//            $c = $category->find($id);
+//            echo("<br/><br/>");
+//            return $c->name;
+//        } else {
+//            return "<br/>Não possui ID.<br/>";
+//        }
+//    }]);
+//   echo(route('categorias'));
+//   echo("<br/><br/>");
+//    
+//    Route::get('produtosgerais/{id?}',['as'=>'produtos',function($id = null) {
+//        if ($id) {
+//            $products = new \Portfolio\Products();
+//            $p = $products->find($id);
+//            echo("<br/><br/>");
+//            return $p->name;
+//        } else {
+//            return "<br/>Não possui ID.<br/>";
+//        }
+//    }]);
+//   echo("<br/><br/>"); 
+//   echo(route('produtos'));
+//
+//  
+//});
 
 //FIM
+/********ROTAS DAS CATEGORIAS ***********/
+Route::get('categories', ['as'=>'categories','uses'=>'CategoriesController@index']);
+Route::post('categories', ['as'=>'categories.store','uses'=>'CategoriesController@store']);
+Route::get('categories/create', ['as'=>'categories.create','uses'=>'CategoriesController@create']);
+Route::get('categories/{id}/destroy', ['as'=>'categories.destroy','uses'=>'CategoriesController@destroy']);
+Route::put('categories/{id}/update', ['as'=>'categories.update','uses'=>'CategoriesController@update']);
+Route::get('categories/{id}/edit', ['as'=>'categories.edit','uses'=>'CategoriesController@edit']);
+/* FIM DAS ROTAS CATEGORIAS   */
+
+
+/******** INICIO DAS ROTAS PRODUCTS *****/
+Route::get('products', ['as'=>'products','uses'=>'ProductsController@index']);
+Route::post('products', ['as'=>'products.store','uses'=>'ProductsController@store']);
+Route::get('products/create', ['as'=>'products.create','uses'=>'ProductsController@create']);
+Route::get('products/{id}/destroy', ['as'=>'products.destroy','uses'=>'ProductsController@destroy']);
+Route::put('products/{id}/update', ['as'=>'products.update','uses'=>'ProductsController@update']);
+Route::get('products/{id}/edit', ['as'=>'products.edit','uses'=>'ProductsController@edit']);
+/******** FIM DAS ROTAS PRODUCTS *****/
+
+
+//Route::get('categories', 'CategoriesController@index');
+
+
+//Route::get('categories/create', 'CategoriesController@create');
+
+//Route::post('categories', 'CategoriesController@store');
+
+
 
 //Route::get('categorias', 'AdminCategoriesController@consulta');
 
 //Testando este no momento
 Route::get('exemplo', 'WelcomeController@exemplo');
 
-Route::get('/', 'WelcomeController@index');
+//Route::get('/', 'WelcomeController@index');
+
+Route::get('/', 'EcommerceController@index');
 
 //Direciona para o index através do caminho localhost:8000/admin/categories
 Route::get('admin/categories', 'AdminCategoriesController@index');
